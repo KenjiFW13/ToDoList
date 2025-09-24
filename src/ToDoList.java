@@ -8,12 +8,14 @@ public class ToDoList {
 
      int opcao = 0;
 
-     while (opcao != 4) {
+     while (opcao != 6) {
          System.out.println("\n--- TO-DO LIST ---");
          System.out.println("1 - Adicionar Tarefa");
          System.out.println("2 - Listar Tarefas ");
          System.out.println("3 - Remover Tarefa");
-         System.out.println("4 - Sair");
+         System.out.println("4 - Editar Tarefa");
+         System.out.println("5 - Concluir Tarefa");
+         System.out.println("6 - Sair");
          System.out.println("Escolha uma opção: ");
          opcao = scanner.nextInt();
          scanner.nextLine(); // Consumir ENTER
@@ -55,6 +57,42 @@ public class ToDoList {
                  break;
 
              case 4:
+                 if (tarefas.isEmpty()) {
+                     System.out.println("Nenhuma tarefa cadastrada!");
+                 } else {
+                     System.out.println("Digite o número da tarefa para editar: ");
+                     int numEditar = scanner.nextInt();
+                     scanner.nextLine(); // consumir ENTER
+                     if (numEditar > 0 && numEditar <= tarefas.size()) {
+                         System.out.println("Digite o novo texto da tarefa: ");
+                         String novaTarefa = scanner.nextLine();
+                         tarefas.set(numEditar - 1, novaTarefa); // substitui
+                         System.out.println("Tarefa editada!");
+                     } else {
+                         System.out.println("Número inválido!");
+                     }
+                 }
+                 break;
+
+             case 5:
+                 if (tarefas.isEmpty()) {
+                     System.out.println("Nenhuma tarefa cadastrada!");
+                 } else {
+                     System.out.println("Digite o número da tarefa para concluir: ");
+                     int numConcluir = scanner.nextInt();
+                     scanner.nextLine(); // consumir ENTER
+                     if (numConcluir > 0 && numConcluir <= tarefas.size()) {
+                         String tarefaAtual = tarefas.get(numConcluir - 1);
+                         String novaTarefa = "[V] " + tarefaAtual;
+                         tarefas.set(numConcluir - 1, novaTarefa);
+                         System.out.println("Tarefa marcada como concluída");
+                     } else {
+                         System.out.println("Número inválido!");
+                     }
+                 }
+                 break;
+
+             case 6:
                  System.out.println("Saindo...");
                  break;
 
